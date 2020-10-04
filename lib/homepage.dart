@@ -6,14 +6,35 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
   static const String FONT_PROXIMA = "ProximaNova";
+  TabController _tabController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _tabController = TabController(length: 5, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyTopBar(
         title: "Instagram",
+      ),
+      bottomNavigationBar: TabBar(
+        unselectedLabelColor: Colors.grey,
+        labelColor: Colors.black,
+        controller: _tabController,
+        indicatorColor: Colors.black,
+        tabs: [
+          Tab(icon: Icon(Icons.home)),
+          Tab(icon: Icon(Icons.search)),
+          Tab(icon: Icon(Icons.add_box)),
+          Tab(icon: Icon(Icons.favorite)),
+          Tab(icon: Icon(Icons.perm_identity)),
+        ],
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
